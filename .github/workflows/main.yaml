@@ -1,34 +1,23 @@
-name: Terraform Infra Deploy
+name: Hello World Sleep Demo
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 # 🔒 Concurrency configuration
 concurrency:
-  group: terraform-infra-prod
-  cancel-in-progress: false   # set true if you want new runs to cancel old ones
+  group: hello-world-demo
+  cancel-in-progress: false   # true = cancel old run, false = wait
 
 jobs:
-  terraform:
+  hello:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Say Hello
+        run: echo "Hello World"
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: 1.6.6
+      - name: Sleep for 5 minutes
+        run: sleep 300
 
-      - name: Terraform Init
-        run: terraform init
-
-      - name: Terraform Plan
-        run: terraform plan
-
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
+      - name: Done
+        run: echo "Finished after 5 minutes"
