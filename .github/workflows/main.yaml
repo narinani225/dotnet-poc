@@ -1,12 +1,14 @@
 name: Hello World Sleep Demo
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
-# 🔒 Concurrency configuration
 concurrency:
   group: hello-world-demo
-  cancel-in-progress: false   # true = cancel old run, false = wait
+  cancel-in-progress: false
 
 jobs:
   hello:
